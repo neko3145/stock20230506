@@ -1,8 +1,13 @@
-docker load --input flask3.tar
 
 from ubuntu
-run 
 
-EXPOSE 80 [5000]
+run apt-get update -y \
+&& apt-get install python3 -y\
+&& apt-get install python3-flask -y
 
-CMD ["cd /web & run flask", "run"]
+COPY web/ /web/
+
+EXPOSE 5000
+
+WORKDIR /web
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
